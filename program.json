@@ -1,0 +1,10 @@
+{
+    "program": "is_prime.aleo",
+    "version": "0.0.0",
+    "description": "",
+    "development": {
+        "private_key": "APrivateKey1zkpHyX8RCiKwDpJQCns2GYdNHo9kB3PoU3YSRFJSiLGH6dQ",
+        "address": "aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4"
+    },
+    "license": "MIT"
+}
