@@ -7,43 +7,49 @@ record prime:
     number as u32.private;
     iterations as u32.private;
     canary as boolean.public;
+    is_prime as boolean.public;
 
 function mint_prime_token:
     input r0 as address.private;
     input r1 as u32.private;
 
-    cast r0 0u64 r1 2u32 false into r2 as prime.record;
+    cast r0 0u64 r1 1u32 true false into r2 as prime.record;
     output r2 as prime.record;
 
 function prove_prime_token:
     input r0 as prime.record;
 
-    // corner case (r4)
-    is.eq r0.number 0u32 into r1;  // r1 is 0
-    is.eq r0.number 1u32 into r2;  // r1 is 1
-    or r1 r2 into r3;              // r1 is 0 or 1
+    is.eq r0.number r0.iterations into r1; // check whether to keep iterating
 
-    // r0.number == r0.iterations: it divides by itself and hasn't returned false yet (r4)
-    is.eq r0.number r0.iterations into r4;
+    // iterate first
+    ternary r1 0u32 1u32 into r2;   // Only iterate when the proof is incomplete
+    add r0.iterations r2 into r3;   // r0.iterations
 
-    // base cases (r6)
-    mod r0.number r0.iterations into r5;
-    is.eq r5 0u32 into r6;
+    // corner case (r6)
+    is.eq r0.number 0u32 into r4;  // r0.number is 0
+    is.eq r0.number 1u32 into r5;  // r0.number is 1
+    or r4 r5 into r6;              // r0.number is 0 or 1
 
-    // iterate
-    ternary r4 0u32 1u32 into r7;  // Only iterate when the proof is incomplete
-    add r0.iterations r7 into r8;  // r0.iterations
+    // r0.number == r0.iterations: it divides by itself and hasn't returned false yet (r7)
+    is.eq r0.number r3 into r7;
 
-    and r4 r6 into r9;                         // n == i and n % i == 0
-    ternary r3 false r9 into r10;              // false if n == 0 or n == 1
-    ternary r0.canary r0.canary r10 into r11;  // don't kill canary only bring it to life
+    // base cases (r11)
+    mod r0.number r3 into r8;
+    is.eq r8 0u32 into r9;  // n % i == 0
+    not r7 into r10;        // n != i
+    and r9 r10 into r11;    // n % i == 0 && n != i
 
-    cast r0.owner r0.gates r0.number r8 r11 into r12 as prime.record;
-    output r12 as prime.record;
+    or r6 r11 into r12;                    // (n == 0 || n == 1) || (n % i == 0 && n != i)
+    ternary r12 false r0.canary into r13;  // kill the canary if necessary
+    and r13 r7 into r14;                   // assess prime (r7 true while r12 remains false)
+
+    cast r0.owner r0.gates r0.number r3 r13 r14 into r15 as prime.record;
+    output r15 as prime.record;
 
 function validate_prime_record:
     input r0 as prime.record;
 
     is.eq r0.iterations r0.number into r1;
     and r1 r0.canary into r2;
-    output r2 as boolean.public;
+    and r0.is_prime r2 into r3;
+    output r3 as boolean.public;

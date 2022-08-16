@@ -18,11 +18,11 @@ The output:
   owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
   gates: 0u64.private,
   number: 5u32.private,
-  iterations: 2u32.private,
-  canary: false.public,
-  _nonce: 6786340062939823377029634299017058544042714779065363921903655949031855077293group.public
-}
-"
+  iterations: 1u32.private,
+  canary: true.public,
+  is_prime: false.public,
+  _nonce: 603339317380415816314570888404126663464436332980512234750917908760393090867group.public
+}"
 ```
 
 Next steps, verify:
@@ -32,33 +32,37 @@ aleo run prove_prime_token "{
   owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
   gates: 0u64.private,
   number: 5u32.private,
+  iterations: 1u32.private,
+  canary: true.public,
+  is_prime: false.public,
+  _nonce: 603339317380415816314570888404126663464436332980512234750917908760393090867group.public
+}"
+aleo run prove_prime_token "{
+  owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
+  gates: 0u64.private,
+  number: 5u32.private,
   iterations: 2u32.private,
-  canary: false.public,
-  _nonce: 6786340062939823377029634299017058544042714779065363921903655949031855077293group.public
+  canary: true.public,
+  is_prime: false.public,
+  _nonce: 6328869172842952576813143067373849549188650736300757547383240395187818915446group.public
 }"
 aleo run prove_prime_token "{
   owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
   gates: 0u64.private,
   number: 5u32.private,
   iterations: 3u32.private,
-  canary: false.public,
-  _nonce: 2716198809378205391914982020143714092174642339782749332069558411160799870873group.public
+  canary: true.public,
+  is_prime: false.public,
+  _nonce: 248329312141775632021658271280856324179595097992133796740743937862232527036group.public
 }"
 aleo run prove_prime_token "{
   owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
   gates: 0u64.private,
   number: 5u32.private,
   iterations: 4u32.private,
-  canary: false.public,
-  _nonce: 5175584816067970736570307079932297433171951306714395019500456281657756765395group.public
-}"
-aleo run prove_prime_token "{
-  owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
-  gates: 0u64.private,
-  number: 5u32.private,
-  iterations: 5u32.private,
-  canary: false.public,
-  _nonce: 4654998286738639742127353247137168328814257952593647199338092376033887167307group.public
+  canary: true.public,
+  is_prime: false.public,
+  _nonce: 7879508746557493898655206073250219079880128488601554336586527098259605947701group.public
 }"
 ```
 
@@ -71,7 +75,21 @@ Output:
   number: 5u32.private,
   iterations: 5u32.private,
   canary: true.public,
-  _nonce: 3152369348145351468305928601773481614182533225914664444889024782882444496136group.public
+  is_prime: true.public,
+  _nonce: 5713367399487472733591011170776859178690336536443012147369880313874690987675group.public
 }"
 ```
 
+Example output for a non-prime, 4:
+
+```bash
+"{
+  owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
+  gates: 0u64.private,
+  number: 4u32.private,
+  iterations: 2u32.private,
+  canary: false.public,
+  is_prime: false.public,
+  _nonce: 247015275615163886871000029275079704803284513076811046962610271273711999414group.public
+}"
+```
