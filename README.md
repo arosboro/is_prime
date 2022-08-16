@@ -57,7 +57,7 @@ aleo run prove_prime_token "{
   gates: 0u64.private,
   number: 5u32.private,
   iterations: 5u32.private,
-  canary: false.public,  <--- this should be true
+  canary: false.public,
   _nonce: 4654998286738639742127353247137168328814257952593647199338092376033887167307group.public
 }"
 ```
@@ -68,10 +68,10 @@ Output:
 "{
   owner: aleo1lr6ap3ed4q823wek3kk9eha3e8e98wv40x578zhl6afmds2twqxs8szyj4.private,
   gates: 0u64.private,
-  number: 3u32.private,
-  iterations: 3u32.private,
+  number: 5u32.private,
+  iterations: 5u32.private,
   canary: true.public,
-  _nonce: 4777302952831099819779485097517628248126635588727278619966342020907087569017group.public
+  _nonce: 3152369348145351468305928601773481614182533225914664444889024782882444496136group.public
 }"
 ```
 
